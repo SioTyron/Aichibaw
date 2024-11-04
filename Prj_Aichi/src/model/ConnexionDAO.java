@@ -1,38 +1,33 @@
 package model;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnexionDAO {
-	private static ConnexionDAO connexion =null; 
-	
-	public static ConnexionDAO getConnexion() {
-		try {
-			// Connection à MySQL
-			
-			String url = "jdbc:mysql://localhost:3306/aichidb";
-			String username = "root";
-			String password = "root";
-			
-			
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			connexion = (ConnexionDAO) DriverManager.getConnection(url,
-			username, password);
-			
-		} catch (SQLException e) { 
-			e.printStackTrace();
-			System.err.println("Erreur de connexion à la base de données : " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Connexion réussie");
-		}
-		return connexion;
-	}
+    private static Connection connexion = null;
+    private static final String URL = "jdbc:mysql://localhost:3306/aichidb?serverTimezone=UTC";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "root";
 
-	public static ConnexionDAO getConnection() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public static Connection getConnexion() {
+        try {
+            if (connexion == null || connexion.isClosed()) {
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    System.out.println("Tentative de connexion à " + URL);
+                    connexion = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+                    System.out.println("Connexion réussie à la base de données");
+                } catch (ClassNotFoundException e) {
+                    System.err.println("Driver MySQL non trouvé : " + e.getMessage());
+                    e.printStackTrace();
+                    throw new SQLException("Driver MySQL non trouvé");
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur de connexion à la base de données : " + e.getMessage());
+            e.printStackTrace();
+        }
+        return connexion;
+    }
 }
-
