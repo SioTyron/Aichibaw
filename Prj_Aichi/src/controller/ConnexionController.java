@@ -1,9 +1,6 @@
 package controller;
 
 import model.UserDAO;
-
-import java.sql.SQLException;
-
 import model.User;
 import views.FConnexionView;
 
@@ -18,10 +15,10 @@ public class ConnexionController {
     }
 
     private void validerConnexion() {
-        String login = view.getLogin();
-        String password = view.getMotDePasse();
-        User user = userDAO.authenticateUser(login, password);
-        System.out.println(user);
+        String login = view.getLogin(); // Assurez-vous que cette méthode existe
+        String password = view.getMotDePasse(); // Assurez-vous que cette méthode existe
+        User user = userDAO.authenticateUser (login, password);
+
         if (user != null) {
             view.showMessage("Connexion Validée");
         } else {

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnexionDAO {
     private static Connection connexion = null;
-    private static final String URL = "jdbc:mysql://localhost:3306/aichidb?serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:8889/aichidb?serverTimezone=UTC&useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
 
@@ -22,6 +22,10 @@ public class ConnexionDAO {
                     System.err.println("Driver MySQL non trouvé : " + e.getMessage());
                     e.printStackTrace();
                     throw new SQLException("Driver MySQL non trouvé");
+                } catch (SQLException e) {
+                    System.err.println("Erreur de connexion à la base de données : " + e.getMessage());
+                    e.printStackTrace();
+                    throw e; // relancer l'exception pour gérer l'erreur plus haut
                 }
             }
         } catch (SQLException e) {

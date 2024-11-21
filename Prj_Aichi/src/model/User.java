@@ -3,45 +3,29 @@ package model;
 public class User {
     private int id;
     private String nom;
-    private String mot_de_passe;
-    private String type_acces;
+    private String motDePasse;
+    private String role; // Utilisé pour le type d'accès
 
-    public User(int id, String nom, String mot_de_passe, String type_acces) {
+    public User(int id, String nom, String motDePasse, String role) {
         this.id = id;
         this.nom = nom;
-        this.mot_de_passe = mot_de_passe;
-        this.type_acces = type_acces;
+        this.motDePasse = motDePasse;
+        this.role = role;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public String getMotDePasse() {
+        return motDePasse;
     }
 
-    public String getMot_de_passe() {
-        return mot_de_passe;
-    }
-
-    public void setMot_de_passe(String mot_de_passe) {
-        this.mot_de_passe = mot_de_passe;
-    }
-
-    public String getType_acces() {
-        return type_acces;
-    }
-
-    public void setType_acces(String type_acces) {
-        this.type_acces = type_acces;
+    public String getRole() {
+        return role;
     }
 }

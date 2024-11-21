@@ -1,53 +1,35 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDAO {
     private Connection connection;
 
     public UserDAO() {
-        try {
-            this.connection = ConnexionDAO.getConnexion();
-            if (this.connection == null) {
-                throw new SQLException("Impossible d'établir la connexion à la base de données");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de l'initialisation de UserDAO : " + e.getMessage());
-            e.printStackTrace();
-        }
+        this.connection = ConnexionDAO.getConnexion();
     }
 
-    public User authenticateUser(String nom, String mot_de_passe) {
-        User utilisateur = null;
-        String query = "SELECT * FROM Utilisateurs WHERE nom = ? AND mot_de_passe = ?";
+    public User authenticateUser (String username, String password) {
+        User user = null;
+        String query = "SELECT * FROM utilisateurs WHERE nom = ? AND mot_de_passe = ?";
 
-        try {
-            if (connection == null || connection.isClosed()) {
-                connection = ConnexionDAO.getConnexion();
-            }
-            
-            try (PreparedStatement stmt = connection.prepareStatement(query)) {
-                stmt.setString(1, nom);
-                stmt.setString(2, mot_de_passe);
-                
-                try (ResultSet resultSet = stmt.executeQuery()) {
-                    if (resultSet.next()) {
-                        utilisateur = new User(
-                            resultSet.getInt("id"),
-                            resultSet.getString("nom"),
-                            resultSet.getString("mot_de_passe"),
-                            resultSet.getString("type_acces")
-                        );
-                    }
-                }
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // Si un utilisateur est trouvé, créez un objet User
+                user = new User(rs.getInt("id"), rs.getString("nom"), rs.getString("mot_de_passe"), rs.getString("type_acces")); // Changement de 'role' à 'type_acces'
+                System.out.println("Authentification réussie pour l'utilisateur : " + username);
+            } else {
+                System.out.println("Authentification échouée pour l'utilisateur : " + username);
             }
         } catch (SQLException e) {
             System.err.println("Erreur lors de l'authentification : " + e.getMessage());
             e.printStackTrace();
         }
-        return utilisateur;
+
+        return user; // Renvoie l'utilisateur ou null si non trouvé
     }
 }
