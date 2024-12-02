@@ -35,7 +35,7 @@ public class UserDAO {
 
     public boolean validateUser(String user, String password) {
         try {
-            String query = "SELECT * FROM user WHERE nom = ? AND password = ?";
+            String query = "SELECT * FROM utilisateurs WHERE nom = ? AND password = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, user);
             statement.setString(2, password);

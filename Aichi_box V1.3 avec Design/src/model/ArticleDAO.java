@@ -71,6 +71,23 @@ public class ArticleDAO {
         }
         return false;
     }
+    
+    public boolean updateArticle(int id, String nom, String description, String prix, String QuantiteEnStock) {
+        String query = "UPDATE articles SET Nom = ?, Description = ?, Prix = ?, QuantiteEnStock = ? WHERE ID = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, nom);
+            stmt.setString(2, description);
+            stmt.setString(3, prix);
+            stmt.setString(4, QuantiteEnStock);
+            stmt.setInt(5, id);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public boolean deleteArticle(int id) {
         String query = "DELETE FROM articles WHERE Id = ?";

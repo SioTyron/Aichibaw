@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConnexionDAO {
     private static Connection connexion = null;
-    private static final String URL = "jdbc:mysql://localhost:3306/aichi";
+    private static final String URL = "jdbc:mysql://localhost:8889/aichi_box?serverTimezone=UTC&useSSL=false";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "root";
 
     public static Connection getConnexion() {
         try {

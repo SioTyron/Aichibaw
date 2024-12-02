@@ -13,6 +13,7 @@ public class ArticlesView extends JFrame {
     private JButton searchButton, addButton, deleteButton, backButton;
 
     private RSMaterialButtonRectangle boutonAjouter;
+    private RSMaterialButtonRectangle boutonModifier;
     private RSMaterialButtonRectangle boutonRetour;
     private RSMaterialButtonRectangle boutonSupprimer;
    private RSMaterialButtonRectangle boutonRechercher;
@@ -34,7 +35,8 @@ public class ArticlesView extends JFrame {
         boutonAjouter = new rojerusan.RSMaterialButtonRectangle();
         boutonSupprimer = new rojerusan.RSMaterialButtonRectangle();
         boutonRetour = new rojerusan.RSMaterialButtonRectangle();
- boutonRechercher = new rojerusan.RSMaterialButtonRectangle();
+        boutonRechercher = new rojerusan.RSMaterialButtonRectangle();
+        boutonModifier = new rojerusan.RSMaterialButtonRectangle();
  
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +84,7 @@ public class ArticlesView extends JFrame {
         articlesTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(articlesTable);
 
-        boutonAjouter.setBackground(new java.awt.Color(255,145,77));
+        boutonAjouter.setBackground(new java.awt.Color(56, 182, 255));
         boutonAjouter.setText("Ajouter");
       
 
@@ -96,7 +98,10 @@ public class ArticlesView extends JFrame {
 
          boutonRechercher.setBackground(new java.awt.Color(255,145,77));
         boutonRechercher.setText("Rechercher");
-     boutonRechercher.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
+        boutonRechercher.setFont(new java.awt.Font("Roboto Medium", 0, 10)); // NOI18N
+        
+        boutonModifier.setBackground(new java.awt.Color(255,145,77));
+        boutonModifier.setText("Modifier");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,6 +126,8 @@ public class ArticlesView extends JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(boutonAjouter, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25)
+                                .addComponent(boutonModifier, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)
                                 .addComponent(boutonSupprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25)
                                 .addComponent(boutonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -142,7 +149,8 @@ public class ArticlesView extends JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boutonAjouter, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boutonSupprimer, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boutonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boutonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(boutonModifier, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -174,6 +182,10 @@ public class ArticlesView extends JFrame {
 
     public JButton getAddButton() {
         return boutonAjouter;
+    }
+    
+    public JButton getEditButton() {
+        return boutonModifier;
     }
 
     public JButton getDeleteButton() {

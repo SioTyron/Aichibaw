@@ -21,6 +21,7 @@ public class ClientsController {
         clientsView.getAddButton().addActionListener(e -> addClient());
         clientsView.getEditButton().addActionListener(e -> editClient());
         clientsView.getDeleteButton().addActionListener(e -> deleteClient());
+        clientsView.getBackButton().addActionListener(e -> backMenu());
     }
 
     public void showClientsView() {
@@ -35,9 +36,12 @@ public class ClientsController {
     public void addClient() {
         // Logique pour ajouter un client
         String name = JOptionPane.showInputDialog("Nom du client :");
+        String adresse = JOptionPane.showInputDialog("Adresse du client :");
+        String tel = JOptionPane.showInputDialog("Numéro de téléphone du client :");
         String email = JOptionPane.showInputDialog("Email du client :");
         
-        if (clientDAO.addClient(name, email, email, email)) {
+        
+        if (clientDAO.addClient(name, adresse, tel, email)) {
             JOptionPane.showMessageDialog(clientsView, "Client ajouté !");
             loadClients(); // Recharge les clients
         } else {
@@ -52,9 +56,11 @@ public class ClientsController {
             int id = (int) clientsView.getClientsTable().getValueAt(row, 0); // Récupère l'ID du client sélectionné
             // Modifier les détails du client
             String newName = JOptionPane.showInputDialog("Nouveau nom du client :");
+            String newAdr = JOptionPane.showInputDialog("Nouvelle Adresse du client :");
+            String newTel = JOptionPane.showInputDialog("Nouveau numéro de Téléphone du client :");
             String newEmail = JOptionPane.showInputDialog("Nouvel email du client :");
-            
-            if (clientDAO.updateClient(id, newName, newEmail, newEmail, newEmail)) {
+               
+            if (clientDAO.updateClient(id,newName, newAdr, newTel, newEmail)) {
                 JOptionPane.showMessageDialog(clientsView, "Client modifié !");
                 loadClients(); // Recharge les clients
             } else {
@@ -79,5 +85,8 @@ public class ClientsController {
         } else {
             JOptionPane.showMessageDialog(clientsView, "Veuillez sélectionner un client.", "Attention", JOptionPane.WARNING_MESSAGE);
         }
+    }
+    private void backMenu() {
+    	clientsView.dispose();
     }
 }

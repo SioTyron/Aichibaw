@@ -55,6 +55,7 @@ public class FConnexionView extends JFrame {
         jLabel3.setText("Mot de passe :");
 
         connexionButton.setBackground(new java.awt.Color(56, 182, 255));
+        connexionButton.setHorizontalAlignment(javax.swing.JButton.CENTER);
         connexionButton.setText("Se connecter");
       
 
